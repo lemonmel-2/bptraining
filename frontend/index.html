@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- font-awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- linking font family -->
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>SpaceSheep Adventure</title>
+    </head>
+    <body>
+        <h1>SpaceSheep Adventure</h1>
+        <!-- volume control -->
+        <nav>
+            <!-- <audio id="musicAudio">
+                <source src="../assets/retro-game-arcade-236133.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="effectAudio">
+                <source src="../assets/computer-mouse-click-351398.mp3" type="audio/mpeg">
+            </audio> -->
+            <ul>
+                <li class="logo">
+                    <i id="volume" class="fa fa-volume-down" style="color: white; font-size:48px; padding-left: 20px;"></i>
+                </li>
+                <li class="list-item">
+                    <span>Music</span>
+                    <input class="volume" id="music" type="range" min="0" max="1" step="0.01" name="music" oninput="rangeValue.innerText = this.value"><span class="range-value" id="rangeValue">0.50</span>
+                </li>
+                <li class="list-item">
+                    <span>Effect</span>
+                    <input class="volume" id="effect" type="range" min="0" max="1" step="0.01" name="effect" oninput="rangeValue2.innerText = this.value"><span class="range-value" id="rangeValue2">0.50</span>
+                </li>  
+            </ul>
+        </nav>
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        <script src="../backend/script.js" type="module"></script>
+        <!-- <script src="../backend/sound.js" type="module"></script> -->
+    </body>
+</html>

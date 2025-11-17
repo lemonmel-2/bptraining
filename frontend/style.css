@@ -1,0 +1,59 @@
+:root {
+    --left-color: #0a2442;
+    --right-color: #3c1246;
+}
+
+/* importing my pixel font */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+/* removing the default margin provided by the browser */
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Silkscreen', sans-serif,  cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(to right, var(--left-color), var(--right-color));
+}
+
+canvas { 
+    padding-top: 30px;
+    display: block; 
+    margin: auto; 
+    background: #26223c; 
+}
+
+h1{
+    color: #ffffff;
+}
+
+
+nav {
+    padding: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+nav ul li span {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.range-value {
+    width: 40px; 
+}
+
+
