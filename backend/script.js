@@ -1,5 +1,6 @@
 import { Asteroid } from './Asteroid.js';
 import { Sheep } from './Sheep.js';
+import { playGameOverAudio } from './sound.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -77,6 +78,7 @@ function checkCollision(sheep, asteroid) {
 }
 
 function resetGame(){
+    playGameOverAudio();
     asteroids.splice(0, asteroids.length);
     sheep.x = startX;
     sheep.y = startY;
