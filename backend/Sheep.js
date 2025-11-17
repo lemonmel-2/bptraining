@@ -10,7 +10,7 @@ export class Sheep{
         // Helmet circle properties
         const helmetCenterX = this.x + this.width*0.8;
         const helmetCenterY = this.y + this.height*0.2; // Adjust to cover head
-        const helmetRadius = 25; // Adjust size to fit dino's head
+        const helmetRadius = 25; 
 
         // Body
         ctx.fillStyle = '#ffffffff';
@@ -36,7 +36,6 @@ export class Sheep{
         ctx.lineWidth = 3;
         ctx.stroke();
 
-        // Optional: Add slight transparency inside helmet
         ctx.fillStyle = 'rgba(42, 66, 110, 0.5)';
         ctx.fill();
     }
