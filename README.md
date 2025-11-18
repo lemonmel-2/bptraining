@@ -1,5 +1,5 @@
-# SPACESHEEP ADVENTURE
-## 🐑 Game Description
+# 🐑🚀 SPACESHEEP ADVENTURE 🐑🚀
+## 🕹️ Game Description
 Spacesheep Adventure is a fun browser-based game where you control a sheep in space! Your mission: dodge as many asteroids as possible and survive for as long as you can.
 
 ## 🎮 Game Rules
