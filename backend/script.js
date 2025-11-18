@@ -22,8 +22,9 @@ let score = 0;
 let gameOver = false;
 let spawnInterval;
 
-const sheep = new Sheep(startX, startY, sheepWidth, sheepHeight);
+const sheep = new Sheep(startX, startY-sheepHeight/2, sheepWidth, sheepHeight);
 
+// add asteroid to asteroids list
 function spawnAsteroid(){
     if(asteroids.length <=10){
         asteroids.push(new Asteroid(
@@ -35,6 +36,7 @@ function spawnAsteroid(){
     }
 }
 
+// main game function animation loop
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     asteroids.forEach(asteroid => {
@@ -55,13 +57,14 @@ function gameLoop() {
     }
 }
 
+// update score counter
 function increaseScore(){
     score += 1;
     const formattedScore = score.toString().padStart(scoreDigits, '0');
     scoreCounter.textContent = formattedScore;
 }
 
-
+// check asteroid body intersect with sheep body
 function checkCollision(sheep, asteroid) {
     const sheepLeft = sheep.x;
     const sheepRight = sheep.x + sheepWidth;
@@ -81,16 +84,18 @@ function checkCollision(sheep, asteroid) {
     );
 }
 
+// reset all objects to init point
 function resetGame(){
     playGameOverAudio();
     asteroids.splice(0, asteroids.length);
     sheep.x = startX;
     sheep.y = startY;
-    clearInterval(spawnInterval);
+    clearInterval(spawnInterval); //renew interval
     startButton.style.display = "block";
     startButton.textContent = "start again!";
 }
 
+// start game trigger point
 startButton.addEventListener('click', () => {
     score = 0;
     gameOver = false;
@@ -99,6 +104,7 @@ startButton.addEventListener('click', () => {
     startButton.style.display = "none";
 })
 
+// sheep movement
 document.addEventListener('keydown', (event) => { 
     const space = 20;
     switch(event.code){
@@ -108,7 +114,7 @@ document.addEventListener('keydown', (event) => {
             }
             break;
         case "ArrowDown":
-            if(sheep.y + space <= canvas.height - sheepHeight - 5){
+            if(sheep.y + space <= canvas.height - sheepHeight - space){
                 sheep.y += space;
             }
             break;

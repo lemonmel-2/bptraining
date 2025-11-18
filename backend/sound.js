@@ -27,6 +27,18 @@ window.addEventListener("click", playMusicOnce);
 window.addEventListener("keydown", playMusicOnce);
 
 /* 
+    game over music played when lose game
+*/
+export function playGameOverAudio(){
+    gameOverAudio.play();
+    const currentVolume = musicAudio.volume;
+    musicAudio.volume = 0;
+    setTimeout(() => {
+        musicAudio.volume = currentVolume;
+    }, 2000);
+}
+
+/* 
     effect music triggered when user interact with page
 */
 function playEffect(){
@@ -54,12 +66,3 @@ document.getElementById("effect").addEventListener('input', (event) => {
     const volume = event.target.value;
     effectAudio.volume = volume;
 });
-
-export function playGameOverAudio(){
-    gameOverAudio.play();
-    const currentVolume = musicAudio.volume;
-    musicAudio.volume = 0;
-    setTimeout(() => {
-        musicAudio.volume = currentVolume;
-    }, 2000);
-}
