@@ -4,13 +4,13 @@ export class Sheep{
         this.y = y;
         this.width = width;
         this.height = height;
+        this.helmetRadius = 25;
     }
 
     draw(ctx) {
         // Helmet circle properties
         const helmetCenterX = this.x + this.width*0.8;
         const helmetCenterY = this.y + this.height*0.2; // Adjust to cover head
-        const helmetRadius = 25; 
 
         // Body
         ctx.fillStyle = '#ffffffff';
@@ -31,7 +31,7 @@ export class Sheep{
 
         // Draw helmet circle (transparent with stroke)
         ctx.beginPath();
-        ctx.arc(helmetCenterX, helmetCenterY, helmetRadius, 0, Math.PI * 2);
+        ctx.arc(helmetCenterX, helmetCenterY, this.helmetRadius, 0, Math.PI * 2);
         ctx.strokeStyle = 'white'; // Helmet outline color
         ctx.lineWidth = 3;
         ctx.stroke();
