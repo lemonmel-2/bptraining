@@ -8,23 +8,22 @@ const startButton = document.getElementById('startGame');
 const scoreCounter = document.getElementById('scoreCounter');
 
 // initialization attributes
-const startX = 50;
-const startY = canvas.height/2;
 const sheepWidth = 80;
 const sheepHeight = 50;
+const startX = 50;
+const startY = canvas.height/2 - sheepHeight/2;
 const speed = 2.1;
 const speedIncrement = 1.0003;
 const asteroids = [];
 const scoreDigits = 7;
 
 // dynamic attributes
-let score = 0;
-let gameOver = false;
 let spawnInterval;
 
 const sheep = new Sheep(startX, startY, sheepWidth, sheepHeight);
 
-function spawnAsteroid(){
+// add asteroid to asteroids list
+function spawnAsteroid(asteroids){
     if(asteroids.length <=10){
         asteroids.push(new Asteroid(
             canvas.width,
@@ -35,7 +34,8 @@ function spawnAsteroid(){
     }
 }
 
-function gameLoop() {
+// main game function animation loop
+function gameLoop(sheep, asteroids, score, gameOver) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     asteroids.forEach(asteroid => {
         asteroid.speed *= speedIncrement;
@@ -47,21 +47,22 @@ function gameLoop() {
         }
     })
     sheep.draw(ctx);
-    increaseScore();
+    score = increaseScore(score);
     if(!gameOver){
-        requestAnimationFrame(gameLoop);
+        requestAnimationFrame(() => gameLoop(sheep, asteroids, score, gameOver));
     }else{
-        resetGame();
+        resetGame(sheep, asteroids);
     }
 }
 
-function increaseScore(){
-    score += 1;
+// update score counter
+function increaseScore(score){
     const formattedScore = score.toString().padStart(scoreDigits, '0');
     scoreCounter.textContent = formattedScore;
+    return score + 1;
 }
 
-
+// check asteroid body intersect with sheep body
 function checkCollision(sheep, asteroid) {
     const sheepLeft = sheep.x;
     const sheepRight = sheep.x + sheepWidth;
@@ -81,34 +82,40 @@ function checkCollision(sheep, asteroid) {
     );
 }
 
-function resetGame(){
+// reset all objects to init point
+function resetGame(sheep, asteroids){
     playGameOverAudio();
     asteroids.splice(0, asteroids.length);
     sheep.x = startX;
     sheep.y = startY;
-    clearInterval(spawnInterval);
+    clearInterval(spawnInterval); //renew interval
     startButton.style.display = "block";
     startButton.textContent = "start again!";
 }
 
+// start game trigger point
 startButton.addEventListener('click', () => {
-    score = 0;
-    gameOver = false;
-    spawnInterval = setInterval(spawnAsteroid, 1000);
-    gameLoop();
+    let score = 0;
+    spawnInterval = setInterval(() => spawnAsteroid(asteroids), 1000);
+    gameLoop(sheep, asteroids, score, false);
     startButton.style.display = "none";
 })
 
+// sheep movement
 document.addEventListener('keydown', (event) => { 
-    const space = 20;
-    switch(event.code){
+    moveSheep(sheep, event.code);
+});
+
+function moveSheep(sheep, direction){
+    const space = sheep.gap;
+    switch(direction){
         case "ArrowUp":
             if(sheep.y - space >= sheep.helmetRadius/2){
                 sheep.y -= space;
             }
             break;
         case "ArrowDown":
-            if(sheep.y + space <= canvas.height - sheepHeight - 5){
+            if(sheep.y + space <= canvas.height - sheepHeight - space){
                 sheep.y += space;
             }
             break;
@@ -123,7 +130,6 @@ document.addEventListener('keydown', (event) => {
             }
             break;
     }
-});
+}
 
-
-
+export {spawnAsteroid, moveSheep, increaseScore, checkCollision, resetGame, gameLoop};

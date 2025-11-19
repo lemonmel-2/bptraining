@@ -1,0 +1,28 @@
+{
+  "name": "bptraining",
+  "version": "1.0.0",
+  "description": "Spacesheep Adventure is a fun browser-based game where you control a sheep in space! Your mission: dodge as many asteroids as possible and survive for as long as you can.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonmel-2/bptraining.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lemonmel-2/bptraining/issues"
+  },
+  "homepage": "https://github.com/lemonmel-2/bptraining#readme",
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0"
+  }
+}
