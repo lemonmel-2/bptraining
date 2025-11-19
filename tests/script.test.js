@@ -44,35 +44,45 @@ beforeAll(async () => {
     });
 });
 
-test('adds asteroid when length <= 10', () => {
-    const asteroids = [];
-    scriptModule.spawnAsteroid(asteroids); 
-    expect(asteroids.length).toBe(1); 
-});
+describe('spawn asteroids', () => {
+    test('adds asteroid when length <= 10', () => {
+        const asteroids = [];
+        scriptModule.spawnAsteroid(asteroids); 
+        expect(asteroids.length).toBe(1); 
+    });
 
-test('move sheep down', () => {
-    const sheep = new Sheep(100,50,800,500);
-    scriptModule.moveSheep(sheep, "ArrowDown"); 
-    expect(sheep.y).toBe(50+sheep.gap); 
-});
+    test('adds asteroid when length > 10', () => {
+        const asteroids = populateAsteroids();
+        scriptModule.spawnAsteroid(asteroids); 
+        expect(asteroids.length).toBe(11); 
+    });
+})
 
-test('move sheep up', () => {
-    const sheep = new Sheep(100,50,800,500);
-    scriptModule.moveSheep(sheep, "ArrowUp"); 
-    expect(sheep.y).toBe(50-sheep.gap);
-});
+describe('sheep movement', () => {
+    test('move sheep down', () => {
+        const sheep = new Sheep(100,50,800,500);
+        scriptModule.moveSheep(sheep, "ArrowDown"); 
+        expect(sheep.y).toBe(50+sheep.gap); 
+    });
 
-test('move sheep right', () => {
-    const sheep = new Sheep(100,50,800,500);
-    scriptModule.moveSheep(sheep, "ArrowRight"); 
-    expect(sheep.x).toBe(100+sheep.gap);
-});
+    test('move sheep up', () => {
+        const sheep = new Sheep(100,50,800,500);
+        scriptModule.moveSheep(sheep, "ArrowUp"); 
+        expect(sheep.y).toBe(50-sheep.gap);
+    });
 
-test('move sheep left', () => {
-    const sheep = new Sheep(100,50,800,500);
-    scriptModule.moveSheep(sheep, "ArrowLeft"); 
-    expect(sheep.x).toBe(100-sheep.gap);
-});
+    test('move sheep right', () => {
+        const sheep = new Sheep(100,50,800,500);
+        scriptModule.moveSheep(sheep, "ArrowRight"); 
+        expect(sheep.x).toBe(100+sheep.gap);
+    });
+
+    test('move sheep left', () => {
+        const sheep = new Sheep(100,50,800,500);
+        scriptModule.moveSheep(sheep, "ArrowLeft"); 
+        expect(sheep.x).toBe(100-sheep.gap);
+    });
+})
 
 test('increase score', () => {
     let score = 1;
@@ -81,13 +91,25 @@ test('increase score', () => {
     expect(document.getElementById("scoreCounter").textContent).toBe('0000001');
 });
 
-test('check collision', () => {
-    let score = 1;
-    score = scriptModule.increaseScore(score);
-    expect(score).toBe(2);
-    expect(document.getElementById("scoreCounter").textContent).toBe('0000001');
-});
+describe('check collision', () => {
+    test('asteroid and sheep on same position', () => {
+        const asteroid = new Asteroid(50,50,100,2);
+        const sheep = new Sheep(50,50,80,50);
+        expect(scriptModule.checkCollision(sheep, asteroid)).toBe(true);
+    });
 
+    test('asteroid intersect with sheep side', () => {
+        const asteroid = new Asteroid(50,50,20,2);
+        const sheep = new Sheep(0,0,100,50);
+        expect(scriptModule.checkCollision(sheep, asteroid)).toBe(true);
+    });
+
+    test('asteroid and sheep no intersect', () => {
+        const asteroid = new Asteroid(100,100,10,2);
+        const sheep = new Sheep(0,0,80,50);
+        expect(scriptModule.checkCollision(sheep, asteroid)).toBe(false);
+    });
+})
 
 test('reset game', () => {
     const asteroids = populateAsteroids();
@@ -98,14 +120,6 @@ test('reset game', () => {
     expect(sheep.y).toBe(150-sheep.height/2);
     expect(soundModule.playGameOverAudio).toHaveBeenCalledTimes(1);
 });
-
-function populateAsteroids(){
-    const asteroids = [];
-    for(let i=0; i<=10; i++){
-        asteroids.push(new Asteroid(100,100,20,2));
-    }
-    return asteroids;
-}
 
 test('game loop', async() => {
     const drawSheep = jest.spyOn(Sheep.prototype, 'draw');
@@ -118,3 +132,11 @@ test('game loop', async() => {
     expect(drawAsteroid).toHaveBeenCalledTimes(11);
     expect(rotateAsteroid).toHaveBeenCalledTimes(11);
 });
+
+function populateAsteroids(){
+    const asteroids = [];
+    for(let i=0; i<=10; i++){
+        asteroids.push(new Asteroid(100,100,20,2));
+    }
+    return asteroids;
+}
