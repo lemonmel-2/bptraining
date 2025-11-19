@@ -5,6 +5,7 @@ export class Sheep{
         this.width = width;
         this.height = height;
         this.helmetRadius = 25;
+        this.gap = 20;
     }
 
     draw(ctx) {

@@ -53,8 +53,8 @@ window.addEventListener('keydown', playEffect);
 */
 document.getElementById("music").addEventListener('input', (event) => {
     const volume = event.target.value;
-    musicAudio.volume = volume;
-    gameOverAudio.volume = volume;
+    adjustVolume(musicAudio, volume);
+    adjustVolume(gameOverAudio, volume);
     if (volume == 0) {
         volumeIcon.className = MUTE_ICON;
     } else {
@@ -63,6 +63,9 @@ document.getElementById("music").addEventListener('input', (event) => {
 });
 
 document.getElementById("effect").addEventListener('input', (event) => {
-    const volume = event.target.value;
-    effectAudio.volume = volume;
+    adjustVolume(effectAudio, event.target.value);
 });
+
+function adjustVolume(audio, volume){
+    audio.volume = volume;
+}
