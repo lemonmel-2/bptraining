@@ -14,10 +14,6 @@ beforeAll(() => {
         <canvas id="gameCanvas"></canvas>
         <button id="startGame"></button>
         <div id="scoreCounter"></div>
-        <input id="music" type="range" />
-        <input id="effect" type="range" />
-        <audio id="musicAudio"></audio>
-        <audio id="gameOverAudio"></audio>
     `;
     const canvas = document.getElementById("gameCanvas");
     canvas.width = 800;
@@ -37,11 +33,10 @@ beforeAll(() => {
     }))
 });
 
+// Dynamically import ESM modules after mocks are applied
 beforeAll(async () => {
-    await jest.isolateModulesAsync(async () => {
-        scriptModule = await import('../backend/script.js'); 
-        soundModule = await import('../backend/sound.js');
-    });
+    scriptModule = await import('../backend/script.js'); 
+    soundModule = await import('../backend/sound.js');
 });
 
 describe('spawn asteroids', () => {
