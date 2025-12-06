@@ -1,11 +1,15 @@
-import { Asteroid } from './Asteroid.js';
-import { Sheep } from './Sheep.js';
+import { recordScore } from './api.js';
+import { Asteroid } from './object/Asteroid.js';
+import { Sheep } from './object/Sheep.js';
+import { formatScore } from './setup.js';
 import { playGameOverAudio } from './sound.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('startGame');
 const scoreCounter = document.getElementById('scoreCounter');
+const highestScore = document.getElementById('highestScore');
+const openLogin  = document.getElementById('openAuthModal');
 
 // initialization attributes
 const sheepWidth = 80;
@@ -15,7 +19,6 @@ const startY = canvas.height/2 - sheepHeight/2;
 const speed = 2.1;
 const speedIncrement = 1.0003;
 const asteroids = [];
-const scoreDigits = 7;
 
 // dynamic attributes
 let spawnInterval;
@@ -51,14 +54,14 @@ function gameLoop(sheep, asteroids, score, gameOver) {
     if(!gameOver){
         requestAnimationFrame(() => gameLoop(sheep, asteroids, score, gameOver));
     }else{
+        recordNewScore(score);
         resetGame(sheep, asteroids);
     }
 }
 
 // update score counter
 function increaseScore(score){
-    const formattedScore = score.toString().padStart(scoreDigits, '0');
-    scoreCounter.textContent = formattedScore;
+    scoreCounter.textContent = formatScore(score);
     return score + 1;
 }
 
@@ -80,6 +83,18 @@ function checkCollision(sheep, asteroid) {
         sheepTop < asteroidBottom &&
         sheepBottom > asteroidTop
     );
+}
+
+async function recordNewScore(score){
+    try{
+        const data = await recordScore(score);
+        console.log(data);
+        if(data == true){
+            highestScore.innerHTML = formatScore(score);
+        }
+    } catch (err) {
+        console.error("Failed to record score:", err);
+    }
 }
 
 // reset all objects to init point
