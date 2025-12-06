@@ -35,12 +35,91 @@
                 </li>  
             </ul>
         </nav>
+
+        <div class="menu">
+            <button id="openLeaderboardModal" class="menu-btn">🏆 Leaderboard</button>
+            <button id="openInventoryModal" class="menu-btn">🎒 Inventory</button>
+            <button id="openShopModal" class="menu-btn">🛒 Shop</button>
+            <button id="openAuthModal" class="menu-btn">🌐 Login/Register</button>
+        </div>
+
         <div id="container">
             <canvas id="gameCanvas" width="800" height="300"></canvas>
             <button id="startGame">Start Game!</button>
-            <p id="scoreCounter"></p>
+            <div id="scoreBoard">
+                <p>HI</p>
+                <p id="highestScore">0000000</p>
+                <p id="scoreCounter">0000000</p>
+            </div>
         </div>
-        <script src="../backend/script.js" type="module"></script>
+
+        <div id="authModal" class="modal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <button class="modal-close" id="closeAuthModal">&times;</button>
+                <form id="authForm">
+                    <h2>Login / Register</h2>
+                    <label for="username">User ID</label>
+                    <input id="username" name="username" type="text" placeholder="your_user_id" required>
+
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="••••••••" required>
+
+                    <button type="submit" id="loginSubmit" name="login">Login</button>
+                    <button type="submit" id="registerSubmit" name="register">Register</button>
+                    <p id="authMessage" class="message"></p>
+                </form>
+            </div>
+        </div>
+
+        <div id="leaderboardModal" class="modal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <button class="modal-close" id="closeLeaderboardModal">&times;</button>
+                <h2>Leaderboard</h2>
+                <div id="leaderboardStatus" class="message"></div>
+                <div class="table-wrap">
+                    <table class="board">
+                        <thead>
+                        <tr>
+                            <th style="width:64px;">Rank</th>
+                            <th>User</th>
+                            <th style="width:120px;">Score</th>
+                        </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                        <!-- rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="inventoryModal" class="modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <button class="modal-close" id="closeInventoryModal">&times;</button>
+                <h2>Inventory</h2>
+                <div id="inventoryStatus" class="message"></div>
+                <div class="inventory-grid" id="inventoryBody">
+                    <!-- items injected here -->
+                </div>
+            </div>
+        </div>
+
+        <div id="shopModal" class="modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <button class="modal-close" id="closeShopModal">&times;</button>
+                <h2>Shop</h2>
+                <p>Deduct 200 points to generate an item! (you have unlimited points for now)</p>
+                <button id="generateItemButton">Buy!</button>
+                <div id="shopBody">
+                    <!-- item injected here -->
+                </div>
+            </div>
+        </div>
+
+        <script src="../backend/setup.js" type="module"></script>
+        <script src="../backend/game.js" type="module"></script>
         <script src="../backend/sound.js" type="module"></script>
+        <script src="../backend/modalHandler.js" type="module"></script>
     </body>
 </html>
