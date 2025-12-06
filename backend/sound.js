@@ -2,16 +2,10 @@ const musicAudio = document.getElementById("musicAudio");
 const effectAudio = document.getElementById("effectAudio");
 const gameOverAudio = document.getElementById("gameOverAudio");
 const volumeIcon = document.getElementById("volume");
+const musicSlider = document.getElementById("music");
+const effectSlider = document.getElementById("effect");
 const MUTE_ICON = "fa fa-volume-off";
 const LOUD_ICON = "fa fa-volume-down";
-const DEFAULT_VOLUME = 0.5;
-
-window.onload = function () {
-    musicAudio.loop = true;
-    musicAudio.volume = DEFAULT_VOLUME;
-    effectAudio.volume = DEFAULT_VOLUME;
-    gameOverAudio.volume = DEFAULT_VOLUME;
-}
 
 /* 
     background music only start playing when user interact with page
@@ -51,7 +45,7 @@ window.addEventListener('keydown', playEffect);
 /* 
     adjust volume function
 */
-document.getElementById("music").addEventListener('input', (event) => {
+musicSlider.addEventListener('input', (event) => {
     const volume = event.target.value;
     adjustVolume(musicAudio, volume);
     adjustVolume(gameOverAudio, volume);
@@ -62,10 +56,21 @@ document.getElementById("music").addEventListener('input', (event) => {
     }
 });
 
-document.getElementById("effect").addEventListener('input', (event) => {
+effectSlider.addEventListener('input', (event) => {
     adjustVolume(effectAudio, event.target.value);
 });
 
 function adjustVolume(audio, volume){
     audio.volume = volume;
 }
+
+/* 
+    mute volume
+*/
+volumeIcon.addEventListener('click', () => {
+    adjustVolume(musicAudio, 0);
+    adjustVolume(gameOverAudio, 0);
+    volumeIcon.className = MUTE_ICON;
+    musicSlider.value = 0;
+    effectSlider.value = 0;
+});
