@@ -61,8 +61,9 @@ function gameLoop(sheep, asteroids, score, gameOver) {
 
 // update score counter
 function increaseScore(score){
+    score += 1;
     scoreCounter.textContent = formatScore(score);
-    return score + 1;
+    return score;
 }
 
 // check asteroid body intersect with sheep body
@@ -88,7 +89,6 @@ function checkCollision(sheep, asteroid) {
 async function recordNewScore(score){
     try{
         const data = await recordScore(score);
-        console.log(data);
         if(data == true){
             highestScore.innerHTML = formatScore(score);
         }
