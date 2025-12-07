@@ -37,5 +37,5 @@ Spacesheep Adventure is a fun browser-based game where you control a sheep in sp
 ## ✨ Features
 - **Leaderboard:** Compete with other players and see your high scores on the global leaderboard.
 - **Inventory:** Your collection of items.
-- **Shop:** Spend your earned points to generate a random item to store in your collection.
+- **Shop:** Spend your earned points to generate a random item to store in your collection. (you have unlimited points for now 🎉)
 - **Login/Register:** Create an account or log in to save your progress and scores. 
