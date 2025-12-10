@@ -106,15 +106,7 @@ export async function getUser() {
   return data;
 }
 
-export async function getRandomItem() {
-  const data = await apiFetch("/item-random", {
-    method: "GET"
-  });
-  return data;
-}
-
-export async function addItem(itemId) {
-  const body = { itemId: itemId };
+export async function addItem(itemId, point) {
   const data = await apiFetch("/item-add", {
     method: "POST",
     body: JSON.stringify(body),

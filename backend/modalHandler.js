@@ -1,5 +1,5 @@
 import { addItem, getInventory, getLeaderboard, getRandomItem, login, register } from './api.js';
-import { updateLoginStatus } from './setup.js';
+import { setupScore, updateLoginStatus } from './setup.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -204,18 +204,19 @@ function renderInventory(items) {
 // --- Load and render shop ---
 async function loadShop(){
   try {
-    const data = await getRandomItem();
-    renderShop(data.name);
-    await addItem(data.itemId);
+    const data = await addItem(); 
+    const textContent = `Kaching -500! You got a ${data.name}!`;
+    setupScore(); // Update points display
+    renderShop(textContent);
   } catch (err) {
-    shopBody.innerHTML = `Error: ${err?.message || err}`;
+    renderShop(`Error: ${err?.message || err}`);
   }
 }
 
-function renderShop(item) {
+function renderShop(textContent) {
   shopBody.innerHTML = '';
   const itemStatement = document.createElement('p');
-  itemStatement.textContent = `You got a: ${item}`;
+  itemStatement.textContent = textContent
   shopBody.appendChild(itemStatement);
 }
 
