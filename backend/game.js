@@ -1,7 +1,7 @@
 import { recordScore } from './api.js';
 import { Asteroid } from './object/Asteroid.js';
 import { Sheep } from './object/Sheep.js';
-import { formatScore } from './setup.js';
+import { formatScore, setupScore } from './setup.js';
 import { playGameOverAudio } from './sound.js';
 
 const canvas = document.getElementById('gameCanvas');
@@ -88,10 +88,8 @@ function checkCollision(sheep, asteroid) {
 
 async function recordNewScore(score){
     try{
-        const data = await recordScore(score);
-        if(data == true){
-            highestScore.innerHTML = formatScore(score);
-        }
+        await recordScore(score);
+        await setupScore();
     } catch (err) {
         console.error("Failed to record score:", err);
     }
