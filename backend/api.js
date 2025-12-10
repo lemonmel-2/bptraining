@@ -106,10 +106,9 @@ export async function getUser() {
   return data;
 }
 
-export async function addItem(itemId, point) {
+export async function addItem() {
   const data = await apiFetch("/item-add", {
-    method: "POST",
-    body: JSON.stringify(body),
+    method: "POST"
   });
   return data;
 }

@@ -1,4 +1,4 @@
-import { addItem, getInventory, getLeaderboard, getRandomItem, login, register } from './api.js';
+import { addItem, getInventory, getLeaderboard, login, register } from './api.js';
 import { setupScore, updateLoginStatus } from './setup.js';
 
 const $ = (id) => document.getElementById(id);
