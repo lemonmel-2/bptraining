@@ -4,6 +4,8 @@ const gameOverAudio = document.getElementById("gameOverAudio");
 const volumeIcon = document.getElementById("volume");
 const musicSlider = document.getElementById("music");
 const effectSlider = document.getElementById("effect");
+const musicSliderValue = document.getElementById("musicVolumeRangeValue");
+const effectSliderValue = document.getElementById("effectVolumeRangeValue");
 const MUTE_ICON = "fa fa-volume-off";
 const LOUD_ICON = "fa fa-volume-down";
 
@@ -73,4 +75,6 @@ volumeIcon.addEventListener('click', () => {
     volumeIcon.className = MUTE_ICON;
     musicSlider.value = 0;
     effectSlider.value = 0;
+    musicSliderValue.textContent = 0;
+    effectSliderValue.textContent = 0;
 });

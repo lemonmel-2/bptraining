@@ -27,11 +27,11 @@
                 </li>
                 <li class="list-item">
                     <span>Music</span>
-                    <input class="volume" id="music" type="range" min="0" max="1" step="0.01" name="music" oninput="rangeValue.innerText = this.value"><span class="range-value" id="rangeValue">0.50</span>
+                    <input class="volume" id="music" type="range" min="0" max="1" step="0.01" name="music" oninput="musicVolumeRangeValue.innerText = this.value"><span class="range-value" id="musicVolumeRangeValue">0.50</span>
                 </li>
                 <li class="list-item">
                     <span>Effect</span>
-                    <input class="volume" id="effect" type="range" min="0" max="1" step="0.01" name="effect" oninput="rangeValue2.innerText = this.value"><span class="range-value" id="rangeValue2">0.50</span>
+                    <input class="volume" id="effect" type="range" min="0" max="1" step="0.01" name="effect" oninput="effectVolumeRangeValue.innerText = this.value"><span class="range-value" id="effectVolumeRangeValue">0.50</span>
                 </li>  
             </ul>
         </nav>
@@ -109,9 +109,10 @@
             <div class="modal-dialog" role="document">
                 <button class="modal-close" id="closeShopModal">&times;</button>
                 <h2>Shop</h2>
-                <p>Deduct 200 points to generate an item! (you have unlimited points for now)</p>
+                <p>Deduct 500 points to generate an item!</p>
+                <p>Now you have: <span id="pointsDisplay">0</span> points</p>
                 <button id="generateItemButton">Buy!</button>
-                <div id="shopBody">
+                <div id="shopBody" class="message">
                     <!-- item injected here -->
                 </div>
             </div>
