@@ -72,6 +72,7 @@ function adjustVolume(audio, volume){
 volumeIcon.addEventListener('click', () => {
     adjustVolume(musicAudio, 0);
     adjustVolume(gameOverAudio, 0);
+    adjustVolume(effectAudio, 0);
     volumeIcon.className = MUTE_ICON;
     musicSlider.value = 0;
     effectSlider.value = 0;
